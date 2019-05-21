@@ -13,6 +13,8 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11",
-    "serverless-http": "^2.0.2"
+    "serverless-http": "^2.0.2",
+    "swagger-jsdoc": "^3.2.9",
+    "swagger-ui-express": "^4.0.4"
   }
 }
