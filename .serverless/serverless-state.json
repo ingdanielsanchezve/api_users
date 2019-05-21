@@ -146,7 +146,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/API-users/dev/1558412410545-2019-05-21T04:20:10.545Z/API-users.zip"
+                "S3Key": "serverless/API-users/dev/1558415724197-2019-05-21T05:15:24.197Z/API-users.zip"
               },
               "FunctionName": "API-users-dev-app",
               "Handler": "app.handler",
@@ -170,14 +170,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionsirMYk7BHl7ep688fc8qT30rdWp62Gyaugr0fSgmXak": {
+          "AppLambdaVersionJ0rS3ETho0UKgoVomBboY4Tbc5TJ75oxLahI4umqc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "BWMYbFRYJziHhD+8RM+pW4Whn95N5aCfuhIbnPqNMdk="
+              "CodeSha256": "yfMlpddIcPYIaQX7rditxaTw1i42fWdKnH93hVofIQA="
             }
           },
           "ApiGatewayRestApi": {
@@ -295,7 +295,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1558412395644": {
+          "ApiGatewayDeployment1558415706245": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -387,7 +387,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionsirMYk7BHl7ep688fc8qT30rdWp62Gyaugr0fSgmXak"
+              "Ref": "AppLambdaVersionJ0rS3ETho0UKgoVomBboY4Tbc5TJ75oxLahI4umqc"
             }
           },
           "ServiceEndpoint": {
@@ -503,7 +503,7 @@
     "artifact": "/var/www/users/.serverless/API-users.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/API-users/dev/1558412410545-2019-05-21T04:20:10.545Z",
+    "artifactDirectoryName": "serverless/API-users/dev/1558415724197-2019-05-21T05:15:24.197Z",
     "artifact": "API-users.zip"
   }
 }

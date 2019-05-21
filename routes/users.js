@@ -4,14 +4,9 @@ const AWS = require('aws-sdk');
 const USERS_TABLE = process.env.USERS_TABLE;
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-
 router.post('/', function (req, res, next) {
-    console.log("Creating User");
+
     const {name, login, password, role} = req.body;
-    console.log("name = " + name);
-    console.log("login = " + login);
-    console.log("password = " + password);
-    console.log("role = " + role);
 
     if (typeof login !== 'string') {
         res.status(400).json({error: '"login" must be a string -> ' + login});
@@ -36,13 +31,11 @@ router.post('/', function (req, res, next) {
             console.log(error);
             res.status(400).json({error: 'Can`t create new User'});
         }
-        
-        console.log("User " + login + " created successfully.");
         res.json({name, login, password, role});
     });
 });
 
-router.get('/all', function (req, res, next) {
+router.get('/', function (req, res, next) {
     var params = {
             TableName: USERS_TABLE
         };
@@ -56,7 +49,7 @@ router.get('/all', function (req, res, next) {
         });
 });
 
-router.get('/get/:login', function (req, res, next) {
+router.get('/:login', function (req, res, next) {
     const params = {
         TableName: USERS_TABLE,
             Key: {
@@ -78,21 +71,17 @@ router.get('/get/:login', function (req, res, next) {
         });
 });
 
-router.put('/update/:login', function (req, res, next) {
-    console.log("Updating User");
-    const {name, login, password, role} = req.body;
-    console.log("name = " + name);
-    console.log("login = " + login);
-    console.log("password = " + password);
-    console.log("role = " + role);
+router.put('/:login', function (req, res, next) {
 
-    if (typeof login !== 'string') {
-        res.status(400).json({error: '"login" must be a string -> ' + login});
-    } else if (typeof name !== 'string') {
-        res.status(400).json({error: '"name" must be a string' + name});
-    } else if (password == '') {
-        res.status(400).json({error: '"password" can`t be empty'});
-    }
+    const {name, login, password, role} = req.body;
+    
+    // if (typeof login !== 'string') {
+    //     res.status(400).json({error: '"login" must be a string -> ' + login});
+    // } else if (typeof name !== 'string') {
+    //     res.status(400).json({error: '"name" must be a string' + name});
+    // } else if (password == '') {
+    //     res.status(400).json({error: '"password" can`t be empty'});
+    // }
 
     const params = {
         TableName: USERS_TABLE,
@@ -107,20 +96,18 @@ router.put('/update/:login', function (req, res, next) {
         ReturnValues:"UPDATED_NEW"
     };
 
-    console.log("Updating the user");
-    docClient.update(params, function(err, data) {
+    dynamoDb.update(params, function(err, data) {
         if (err) {
-            console.error("Unable to update User. Error JSON:", JSON.stringify(err, null, 2));
+            res.status(400).json({error: "Unable to update User. Error JSON:", data: JSON.stringify(err, null, 2)});
         } else {
-            console.log("User updated successfully:", JSON.stringify(data, null, 2));
+            res.json({"message": "User updated successfully", "data": JSON.stringify(data, null, 2)});
         }
     });
 });
 
-router.delete('/delete/:login', function (req, res, next) {
-    console.log("Deleting User");
-    const {name, login, password, role} = req.body;
-    console.log("login = " + login);
+router.delete('/:login', function (req, res, next) {
+    
+    const login = req.params.login;
 
     if (typeof login !== 'string') {
         res.status(400).json({error: '"login" must be a string -> ' + login});
@@ -133,14 +120,14 @@ router.delete('/delete/:login', function (req, res, next) {
         }
     };
 
-    console.log("Deleting the user: " + login);
-    docClient.delete(params, function(err, data) {
+    dynamoDb.delete(params, function(err, data) {
         if (err) {
-            console.error("Unable to delete User. Error JSON:", JSON.stringify(err, null, 2));
+            res.status(400).json({error: "Unable to delete User. Error JSON:", data: JSON.stringify(err, null, 2)});
         } else {
-            console.log("User Deleted successfully:", JSON.stringify(data, null, 2));
+            res.json({"message": "User deleted successfully", "data": JSON.stringify(data, null, 2)});
         }
     });
+    
 });
 
 module.exports = router;
