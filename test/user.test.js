@@ -101,7 +101,7 @@ describe('POST /users', function () {
 });
 
 /**
- * Testing post user endpoint
+ * Testing put user endpoint
  */
 describe('PUT /users', function () {
     let data = {
@@ -110,6 +110,7 @@ describe('PUT /users', function () {
         "password": "MyNewPassword",
         "role": "Admin"
     }
+    this.timeout(10000);
     it('respond with 200 updated', function (done) {
         request(api_url)
             .put('/users')
@@ -124,7 +125,7 @@ describe('PUT /users', function () {
 });
 
 /**
- * Testing post user endpoint
+ * Testing delete user endpoint
  */
 describe('DELETE /users/:login', function () {
     

@@ -102,13 +102,17 @@ exports.updateUser = function(req, res, next){
         ReturnValues:"UPDATED_NEW"
     };
 
-    dynamoDb.update(params, function(err, data) {
-        if (err) {
-            res.status(400).json({message: "Unable to update User", error: err});
-        } else {
-            res.json({message: "User updated successfully", data: data});
-        }
-    });
+    try{
+        dynamoDb.update(params, function(err, data) {
+            if (err) {
+                res.status(400).json({message: "Unable to update User", error: err});
+            } else {
+                res.json({message: "User updated successfully", data: data});
+            }
+        });
+    } catch(e) {
+        res.status(400).json({message: "Unable to update User", error: e});
+    }
 }
 
 exports.deleteUser = function(req, res, next){
