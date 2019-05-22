@@ -88,7 +88,12 @@ exports.updateUser = function(req, res, next){
         Key:{
             "login": login
         },
-        UpdateExpression: "set name = :n, password = :p, role = :r",
+        UpdateExpression: "set #Name = :n, #Password = :p, #Role = :r",
+        ExpressionAttributeNames: {
+            '#Name'     : 'name',
+            '#Password' : 'password',
+            '#Role'     : 'role',
+        },
         ExpressionAttributeValues:{
             ":n": name,
             ":p": password,
@@ -99,7 +104,7 @@ exports.updateUser = function(req, res, next){
 
     dynamoDb.update(params, function(err, data) {
         if (err) {
-            res.status(400).json({message: "Unable to update User. Error JSON:", error: err});
+            res.status(400).json({message: "Unable to update User", error: err});
         } else {
             res.json({message: "User updated successfully", data: data});
         }

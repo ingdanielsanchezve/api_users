@@ -16,6 +16,12 @@
         }
       }
     },
+    "FunctionNameLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/API-users-dev-functionName"
+      }
+    },
     "AppLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -63,6 +69,9 @@
                   ],
                   "Resource": [
                     {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-functionName:*"
+                    },
+                    {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-app:*"
                     }
                   ]
@@ -73,6 +82,9 @@
                     "logs:PutLogEvents"
                   ],
                   "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-functionName:*:*"
+                    },
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-app:*:*"
                     }
@@ -117,6 +129,47 @@
         }
       }
     },
+    "FunctionNameLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/API-users/dev/1558501206623-2019-05-22T05:00:06.623Z/API-users.zip"
+        },
+        "FunctionName": "API-users-dev-functionName",
+        "Handler": "handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "USERS_TABLE": "API-users-dev"
+          }
+        }
+      },
+      "DependsOn": [
+        "FunctionNameLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "FunctionNameLambdaVersionE97Hr9qtBhvW27h2HV8BtSdxaSlPpzNJ29gyHLGs": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "FunctionNameLambdaFunction"
+        },
+        "CodeSha256": "yH+pCyThZhyXeGQvrs0r7hl/rACsw0+LLcHWJejNx68="
+      }
+    },
     "AppLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -124,7 +177,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/API-users/dev/1558463203090-2019-05-21T18:26:43.090Z/API-users.zip"
+          "S3Key": "serverless/API-users/dev/1558501206623-2019-05-22T05:00:06.623Z/API-users.zip"
         },
         "FunctionName": "API-users-dev-app",
         "Handler": "app.handler",
@@ -148,14 +201,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AppLambdaVersionNNCP97sS9ydZGELsChNEeUxuu8EWRGM9rTWKUtzw": {
+    "AppLambdaVersiontawYYItavjLjn1ezZLmg2yQtEhewg9j5UylkqZEBxI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "HIuNlYZbx5kKjFetaaZ9udD/6Lg9uKcxcod176ziS8g="
+        "CodeSha256": "yH+pCyThZhyXeGQvrs0r7hl/rACsw0+LLcHWJejNx68="
       }
     },
     "ApiGatewayRestApi": {
@@ -273,7 +326,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1558463184248": {
+    "ApiGatewayDeployment1558501185619": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -362,10 +415,16 @@
         "Ref": "ServerlessDeploymentBucket"
       }
     },
+    "FunctionNameLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "FunctionNameLambdaVersionE97Hr9qtBhvW27h2HV8BtSdxaSlPpzNJ29gyHLGs"
+      }
+    },
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionNNCP97sS9ydZGELsChNEeUxuu8EWRGM9rTWKUtzw"
+        "Ref": "AppLambdaVersiontawYYItavjLjn1ezZLmg2yQtEhewg9j5UylkqZEBxI"
       }
     },
     "ServiceEndpoint": {

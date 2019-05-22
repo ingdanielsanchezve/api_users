@@ -62,7 +62,7 @@ describe('POST /users', function () {
         "login": "thisisatest",
         "password": "passwordtest"
     }
-    it('respond with 201 created', function (done) {
+    it('respond with 200 created', function (done) {
         request(api_url)
             .post('/users')
             .send(data)
@@ -92,10 +92,51 @@ describe('POST /users', function () {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(400)
-            .expect('"user not created"')
+            .expect({error:"login can`t be empty"})
             .end((err) => {
                 if (err) return done(err);
                 done();
+            });
+    });
+});
+
+/**
+ * Testing post user endpoint
+ */
+describe('PUT /users', function () {
+    let data = {
+        "name": "I am a Test User",
+        "login": "thisisatest",
+        "password": "MyNewPassword",
+        "role": "Admin"
+    }
+    it('respond with 200 updated', function (done) {
+        request(api_url)
+            .put('/users')
+            .send(data)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function(err, res) {
+                if (err) throw err;
+            });
+    });
+});
+
+/**
+ * Testing post user endpoint
+ */
+describe('DELETE /users/:login', function () {
+    
+    it('respond with 200 deleted', function (done) {
+        request(api_url)
+            .delete('/users/thisisatest')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200, done)
+            .expect({message:"User deleted successfully"})
+            .end(function(err, res) {
+                if (err) throw err;
             });
     });
 });
