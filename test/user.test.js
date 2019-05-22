@@ -133,7 +133,7 @@ describe('DELETE /users/:login', function () {
             .delete('/users/thisisatest')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(200, done)
+            .expect(200)
             .expect({message:"User deleted successfully"})
             .end(function(err, res) {
                 if (err) throw err;
