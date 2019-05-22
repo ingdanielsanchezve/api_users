@@ -42,19 +42,19 @@ exports.createUser = function (req, res, next) {
     if (name !== '') {
         Item.name = name
     }else{
-        res.status(400).json({error: '"name" can`t be empty'});
+        res.status(400).json({error: 'name can`t be empty'});
     }
 
     if (login !== '') {
         Item.login = login
     }else{
-        res.status(400).json({error: '"login" can`t be empty'});
+        res.status(400).json({error: 'login can`t be empty'});
     }
 
     if (password !== '') {
         Item.password = password
     }else{
-        res.status(400).json({error: '"password" can`t be empty'});
+        res.status(400).json({error: 'password can`t be empty'});
     }
 
     if (role !== '') {
@@ -80,7 +80,7 @@ exports.updateUser = function(req, res, next){
     const {login, name, password, role} = req.body;
 
     if (login == '') {
-        res.status(400).json({error: '"login" can`t be empty'});
+        res.status(400).json({error: 'login can`t be empty'});
     }
 
     const params = {
@@ -110,7 +110,7 @@ exports.deleteUser = function(req, res, next){
     const login = req.params.login;
 
     if (login == '') {
-        res.status(400).json({error: '"login" can`t be empty'});
+        res.status(400).json({error: 'login can`t be empty'});
     }
 
     const params = {

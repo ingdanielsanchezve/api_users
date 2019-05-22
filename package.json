@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "mocha 'test/user.test.js'"
   },
   "dependencies": {
     "aws-sdk": "^2.459.0",
@@ -12,9 +13,13 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.3",
     "serverless-http": "^2.0.2",
     "swagger-jsdoc": "^3.2.9",
     "swagger-ui-express": "^4.0.4"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "supertest": "^4.0.2"
   }
 }
