@@ -9,7 +9,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
+  stage: prod
   region: us-east-1
   iamRoleStatements:
     - Effect: Allow
@@ -49,3 +49,6 @@ resources:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
         TableName: ${self:custom.tableName}
+
+plugins:
+  - serverless-offline

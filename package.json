@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "mocha": "^6.1.4",
+    "serverless-offline": "^4.10.5",
+    "should": "^13.2.3",
     "supertest": "^4.0.2"
   }
 }

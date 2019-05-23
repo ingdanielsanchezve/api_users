@@ -1,6 +1,7 @@
 //apiTest.js
 const request = require('supertest');
-var api_url = 'https://fbsvtk90aa.execute-api.us-east-1.amazonaws.com/dev';
+var should = require('should');
+var api_url = 'https://j0yajjaeih.execute-api.us-east-1.amazonaws.com/prod';
 
 //==================== Users API tests ====================
 
@@ -44,11 +45,13 @@ describe('GET /users/:login', function () {
             .get('/users/loginisnonexisting')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(404) //expecting HTTP status code
-            .expect({error:"User not found"}) // expecting content value
-            .end((err) => {
-                if (err) return done(err);
-                done();
+            .expect(404)
+            .end((err, res) => {
+                if (err) {
+                  return done(err);
+                }
+                res.body.should.have.property('error', 'User not found')
+                return done();
             });
     });
 });
@@ -69,9 +72,12 @@ describe('POST /users', function () {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end((err) => {
-                if (err) return done(err);
-                done();
+            .end((err, res) => {
+                if (err) {
+                  return done(err);
+                }
+                res.body.should.have.property('message', 'User created sucessfully')
+                return done();
             });
     });
 });

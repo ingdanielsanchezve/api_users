@@ -19,13 +19,13 @@
     "FunctionNameLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/API-users-dev-functionName"
+        "LogGroupName": "/aws/lambda/API-users-prod-functionName"
       }
     },
     "AppLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/API-users-dev-app"
+        "LogGroupName": "/aws/lambda/API-users-prod-app"
       }
     },
     "IamRoleLambdaExecution": {
@@ -53,7 +53,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "dev",
+                  "prod",
                   "API-users",
                   "lambda"
                 ]
@@ -69,10 +69,10 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-functionName:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-prod-functionName:*"
                     },
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-app:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-prod-app:*"
                     }
                   ]
                 },
@@ -83,10 +83,10 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-functionName:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-prod-functionName:*:*"
                     },
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-dev-app:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/API-users-prod-app:*:*"
                     }
                   ]
                 },
@@ -119,7 +119,7 @@
             "-",
             [
               "API-users",
-              "dev",
+              "prod",
               {
                 "Ref": "AWS::Region"
               },
@@ -136,9 +136,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/API-users/dev/1558549677134-2019-05-22T18:27:57.134Z/API-users.zip"
+          "S3Key": "serverless/API-users/prod/1558572291805-2019-05-23T00:44:51.805Z/API-users.zip"
         },
-        "FunctionName": "API-users-dev-functionName",
+        "FunctionName": "API-users-prod-functionName",
         "Handler": "handler",
         "MemorySize": 1024,
         "Role": {
@@ -151,7 +151,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "USERS_TABLE": "API-users-dev"
+            "USERS_TABLE": "API-users-prod"
           }
         }
       },
@@ -160,14 +160,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "FunctionNameLambdaVersionoOZqw7Upnsz7yEIvWPBsgyZqtf6QU41h7HQ8EGaR5N4": {
+    "FunctionNameLambdaVersionwa9PMSfSRjbppahhSOVLmnG8FX8he2B6d6Be5XrF7c": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "FunctionNameLambdaFunction"
         },
-        "CodeSha256": "FEQfIoVU9SLOGng18fJxaBELAcA6yxk6JToTUrAe+SU="
+        "CodeSha256": "1FXfvhAzs9I9ADvFkyjbc76EGhWZVTFZlyi4IAyO3zE="
       }
     },
     "AppLambdaFunction": {
@@ -177,9 +177,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/API-users/dev/1558549677134-2019-05-22T18:27:57.134Z/API-users.zip"
+          "S3Key": "serverless/API-users/prod/1558572291805-2019-05-23T00:44:51.805Z/API-users.zip"
         },
-        "FunctionName": "API-users-dev-app",
+        "FunctionName": "API-users-prod-app",
         "Handler": "app.handler",
         "MemorySize": 1024,
         "Role": {
@@ -192,7 +192,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "USERS_TABLE": "API-users-dev"
+            "USERS_TABLE": "API-users-prod"
           }
         }
       },
@@ -201,20 +201,20 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AppLambdaVersionU7MunknrvwbnlvPXhx2KyHqvtyHYv8NrAH4jkCVg2dc": {
+    "AppLambdaVersion1qTY9bYV9sGgpytezDyKLYJ8EfvOccGkbONuAeGvo6g": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "FEQfIoVU9SLOGng18fJxaBELAcA6yxk6JToTUrAe+SU="
+        "CodeSha256": "1FXfvhAzs9I9ADvFkyjbc76EGhWZVTFZlyi4IAyO3zE="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "dev-API-users",
+        "Name": "prod-API-users",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -326,13 +326,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1558549653081": {
+    "ApiGatewayDeployment1558572269547": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         },
-        "StageName": "dev"
+        "StageName": "prod"
       },
       "DependsOn": [
         "ApiGatewayMethodAny",
@@ -405,7 +405,7 @@
           "ReadCapacityUnits": 10,
           "WriteCapacityUnits": 10
         },
-        "TableName": "API-users-dev"
+        "TableName": "API-users-prod"
       }
     }
   },
@@ -418,13 +418,13 @@
     "FunctionNameLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "FunctionNameLambdaVersionoOZqw7Upnsz7yEIvWPBsgyZqtf6QU41h7HQ8EGaR5N4"
+        "Ref": "FunctionNameLambdaVersionwa9PMSfSRjbppahhSOVLmnG8FX8he2B6d6Be5XrF7c"
       }
     },
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionU7MunknrvwbnlvPXhx2KyHqvtyHYv8NrAH4jkCVg2dc"
+        "Ref": "AppLambdaVersion1qTY9bYV9sGgpytezDyKLYJ8EfvOccGkbONuAeGvo6g"
       }
     },
     "ServiceEndpoint": {
@@ -445,7 +445,7 @@
             {
               "Ref": "AWS::URLSuffix"
             },
-            "/dev"
+            "/prod"
           ]
         ]
       }

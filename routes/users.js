@@ -5,9 +5,24 @@ var user_controller = require('../controllers/UserController');
 
 /**
  * @swagger
- * /users:
+ * components:
+ *      schemas:
+ *        User:
+ *          type: object
+ *          properties:
+ *               login:
+ *                   type: string
+ *               name:
+ *                   type: string
+ *               password:
+ *                   type: string
+ *               role:
+ *                   type: string
+ * 
+ * /prod/users:
  *    get:
- *      description: This should return all users
+ *      summary: "Get a List with all users"
+ *      description: Get a List with all users
  *      operationId: "getUser"
  *      produces:
  *         - "application/json"
@@ -15,8 +30,12 @@ var user_controller = require('../controllers/UserController');
  *      responses:
  *          200:
  *           description: "successful operation"
- *            schema:
- *               type: "object"
+ *           content:
+ *             application/json:
+ *               schema:
+ *                  type: array
+ *                  items:
+ *                    $ref: '#/components/schemas/User'
  *          400:
  *            description: "Error operation" 
  */
@@ -24,24 +43,36 @@ router.get('/', user_controller.getAllUsers);
 
 /**
  * @swagger
- * /users:
- *    get/{login}:
- *      summary: "Find user by login"
+ * /prod/users/{login}:
+ *    get:
+ *      summary: "Find a user by login"
  *      description: "Returns a single User"
  *      operationId: "getUserByLogin"
  *      produces:
  *        - "application/json"
  *      parameters:
- *        - name: "login"
- *            in: "path"
- *            description: "login of user to return"
- *            required: true
- *            type: "string"
+ *        - in: path
+ *          name: login
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: login of the user to get
  *      responses:
  *            200:
- *                description: "successful operation"
- *                schema:
- *                    type: "object"
+ *                description: A single user.
+ *                content:
+ *                    application/json:
+ *                    schema:
+ *                      type: object
+ *                      properties:
+ *                           login:
+ *                               type: string
+ *                           name:
+ *                               type: string
+ *                           password:
+ *                               type: string
+ *                           role:
+ *                               type: string
  *            400:
  *                description: "Invalid login supplied"
  *            404:
@@ -51,67 +82,83 @@ router.get('/:login', user_controller.getUser);
 
 /**
  * @swagger
- * /users:
+ * /prod/users:
  *    post:
+ *      summary: "Create a New User account"
  *      description: Create a User account
  *      operationId: "addUser"
  *      produces:
  *         - "application/json"
- *      parameters:
- *      - in: "body"
- *        name: "body"
- *        description: "User object that needs to be added"
+ *      requestBody:
  *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ *      responses:
+ *            200:
+ *                description: "User created sucessfully"
+ *            400:
+ *               description: "Unable to create User"
+ *            410:
+ *               description: "name can`t be empty"
+ *            420:
+ *               description: "login can`t be empty"
+ *            430:
+ *               description: "password can`t be empty"
  */
 router.post('/', user_controller.createUser);
 
 /**
  * @swagger
- * /users:
+ * /prod/users:
  *    put:
  *      description: Update User account Data
+ *      summary: "Updates a User"
  *      operationId: "updateUser"
  *      consumes:
  *            - "application/json"
  *      produces:
  *            - "application/json"
- *      parameters:
- *            - in: "body"
- *            name: "body"
- *            description: "User object that needs to be added to the store"
- *            required: true
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
  *      responses:
  *            200:
- *                description: "successful operation"
- *                schema:
- *                    type: "object"
+ *                description: "User updated sucessfully"
  *            400:
- *               description: "Invalid login supplied"
+ *               description: "Unable to update User"
+ *            410:
+ *               description: "login can`t be empty"
  */
 router.put('/', user_controller.updateUser);
 
 /**
  * @swagger
- * /users:
+ * /prod/users/{login}:
  *    delete:
  *      description: Delete User account
  *      summary: "Deletes a User"
- *        operationId: "deleteUser"
- *        produces:
+ *      operationId: "deleteUser"
+ *      produces:
  *            - "application/json"
- *        parameters:
- *            - name: "login"
- *              in: "path"
- *              description: "User login to delete"
- *              required: true
- *              type: "string"
- *        responses:
+ *      parameters:
+ *        - in: path
+ *          name: login
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: login of the user to get
+ *      responses:
  *             200:
- *                 description: "successful operation"
- *                 schema:
- *                     type: "object"        
+ *                 description: "User deleted successfully" 
  *             400:
- *                 description: "Invalid login supplied"
+ *                 description: "Unable to delete user"
+ *             410:
+ *                 description: "login can`t be empty"
  */
 router.delete('/:login', user_controller.deleteUser);
 

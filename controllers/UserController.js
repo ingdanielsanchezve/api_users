@@ -38,27 +38,29 @@ exports.getUser = function(req, res, next){
 exports.createUser = function (req, res, next) {
     const {name, login, password, role} = req.body;
     var Item = {}
-
+    
     if (name !== '') {
         Item.name = name
     }else{
-        res.status(400).json({error: 'name can`t be empty'});
+        res.status(410).json({error: 'name can`t be empty'});
     }
-
+    
     if (login !== '') {
         Item.login = login
     }else{
-        res.status(400).json({error: 'login can`t be empty'});
+        res.status(420).json({error: 'login can`t be empty'});
     }
-
+    
     if (password !== '') {
         Item.password = password
     }else{
-        res.status(400).json({error: 'password can`t be empty'});
+        res.status(430).json({error: 'password can`t be empty'});
     }
-
+    
     if (role !== '') {
         Item.role = role
+    }else{
+        Item.role = null
     }
 
     const params = {
@@ -66,13 +68,17 @@ exports.createUser = function (req, res, next) {
         Item: Item
     };
 
-    dynamoDb.put(params, function(err, data) {
-        if (err) {
-            res.status(400).json({messsage: 'Can`t create User', error: err});
-        } else {
-            res.json({message: "User created sucessfully", data: data});
-        }
-    });
+    try{
+        dynamoDb.put(params, function(err, data) {
+            if (err) {
+                res.status(400).json({message: "Unable to create User", error: err});
+            } else {
+                res.json({message: "User created successfully", data: data});
+            }
+        });
+    } catch(e) {
+        res.status(400).json({message: "Unable to create User", error: e});
+    }
 }
 
 exports.updateUser = function(req, res, next){
@@ -80,7 +86,7 @@ exports.updateUser = function(req, res, next){
     const {login, name, password, role} = req.body;
 
     if (login == '') {
-        res.status(400).json({error: 'login can`t be empty'});
+        res.status(410).json({error: 'login can`t be empty'});
     }
 
     const params = {
@@ -119,7 +125,7 @@ exports.deleteUser = function(req, res, next){
     const login = req.params.login;
 
     if (login == '') {
-        res.status(400).json({error: 'login can`t be empty'});
+        res.status(410).json({error: 'login can`t be empty'});
     }
 
     const params = {

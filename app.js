@@ -4,6 +4,21 @@ var path         = require('path');
 var cookieParser = require('cookie-parser');
 var logger       = require('morgan');
 const serverless = require('serverless-http');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Users API',
+      version: '1.0.0',
+    },
+  }, 
+  apis: ['./routes/users.js'],
+};
+
+const specs = swaggerJSDoc(options);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,6 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -40,3 +58,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports.handler = serverless(app)
+// module.exports = app;
