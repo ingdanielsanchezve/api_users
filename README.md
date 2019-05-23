@@ -4,7 +4,7 @@
 
 _ This is a Simple API Users created with Node.Js, Serverless, AWS DynamoDB, Mocha, Should, Supertest, swagger-jsdoc & Swagger UI Express_
 
-![screenshot_frontend](https://user-images.githubusercontent.com/42616141/58219766-1182a480-7cda-11e9-9f7f-a754233fc382.png)
+![screenshot_frontend](https://user-images.githubusercontent.com/42616141/58219937-c2893f00-7cda-11e9-9e01-c474cd2bfd0a.png)
 
 ### Instalation 🔧
 
