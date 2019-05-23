@@ -2,15 +2,15 @@
 
 [API Users](https://j0yajjaeih.execute-api.us-east-1.amazonaws.com/prod/) 
 
-_ This is a Simple API Users created with Node.Js, Serverless, AWS DynamoDB, Mocha, Should, Supertest, swagger-jsdoc & Swagger UI Express_
+_This is a Simple API Users created with Node.Js, Serverless, AWS DynamoDB, Mocha, Should, Supertest, swagger-jsdoc & Swagger UI Express_
 
 ![screenshot_frontend](https://user-images.githubusercontent.com/42616141/58219937-c2893f00-7cda-11e9-9e01-c474cd2bfd0a.png)
 
 ### Instalation 🔧
 
-_ Clone this repo _
+_Clone this repo_
 
-_ Install deendencies using `npm`_
+_Install deendencies using `npm`_
 
 ```
 npm install
@@ -18,7 +18,7 @@ npm install
 
 ## API Documentation ⚙️
 
-_To create the API Documention i used `swagger-jsdoc` and `Swagger UI Express` you can check the API Documentation [HERE](https://j0yajjaeih.execute-api.us-east-1.amazonaws.com/prod/api-docs) _
+_To create the API Documention i used `swagger-jsdoc` and `Swagger UI Express` you can check the API Documentation [HERE](https://j0yajjaeih.execute-api.us-east-1.amazonaws.com/prod/api-docs)_
 
 ![Swagger Docs](https://user-images.githubusercontent.com/42616141/58219801-2e1edc80-7cda-11e9-83ce-3aa29dad14f1.png)
 
