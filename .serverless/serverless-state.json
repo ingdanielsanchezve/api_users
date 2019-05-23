@@ -158,7 +158,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/API-users/prod/1558575749096-2019-05-23T01:42:29.096Z/API-users.zip"
+                "S3Key": "serverless/API-users/prod/1558576306680-2019-05-23T01:51:46.680Z/API-users.zip"
               },
               "FunctionName": "API-users-prod-functionName",
               "Handler": "handler",
@@ -182,14 +182,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "FunctionNameLambdaVersiong52c3P50qlFTN3mJk8AYCpISJD3OVHKgx0rlTd28Dw": {
+          "FunctionNameLambdaVersionldNWFrqvVEoQOR3BOuuJJO8wAp6HZsMvreAZqxKnVXc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "FunctionNameLambdaFunction"
               },
-              "CodeSha256": "9KhQQ+pdbjkzXYCn9PKh4JLtjfCvp5rAbLRMz10MvL4="
+              "CodeSha256": "N6+nyynyulmmr67h7ZpIPDvSf2B9ZJ9BdvGw4z9Y/c0="
             }
           },
           "AppLambdaFunction": {
@@ -199,7 +199,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/API-users/prod/1558575749096-2019-05-23T01:42:29.096Z/API-users.zip"
+                "S3Key": "serverless/API-users/prod/1558576306680-2019-05-23T01:51:46.680Z/API-users.zip"
               },
               "FunctionName": "API-users-prod-app",
               "Handler": "app.handler",
@@ -223,14 +223,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionwEZhVBhTb5H5fW4ojiiOx03xtd9q4JSbmiGixSleJY": {
+          "AppLambdaVersionLlaTbwzsnkf5zWzIx8lvieluePMb1uZDUzDvHHYtT1Y": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "9KhQQ+pdbjkzXYCn9PKh4JLtjfCvp5rAbLRMz10MvL4="
+              "CodeSha256": "N6+nyynyulmmr67h7ZpIPDvSf2B9ZJ9BdvGw4z9Y/c0="
             }
           },
           "ApiGatewayRestApi": {
@@ -348,7 +348,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1558575723600": {
+          "ApiGatewayDeployment1558576282242": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -440,13 +440,13 @@
           "FunctionNameLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "FunctionNameLambdaVersiong52c3P50qlFTN3mJk8AYCpISJD3OVHKgx0rlTd28Dw"
+              "Ref": "FunctionNameLambdaVersionldNWFrqvVEoQOR3BOuuJJO8wAp6HZsMvreAZqxKnVXc"
             }
           },
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionwEZhVBhTb5H5fW4ojiiOx03xtd9q4JSbmiGixSleJY"
+              "Ref": "AppLambdaVersionLlaTbwzsnkf5zWzIx8lvieluePMb1uZDUzDvHHYtT1Y"
             }
           },
           "ServiceEndpoint": {
@@ -575,7 +575,7 @@
     "artifact": "/var/www/users/.serverless/API-users.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/API-users/prod/1558575749096-2019-05-23T01:42:29.096Z",
+    "artifactDirectoryName": "serverless/API-users/prod/1558576306680-2019-05-23T01:51:46.680Z",
     "artifact": "API-users.zip"
   }
 }
