@@ -19,7 +19,7 @@
     "swagger-ui-express": "^4.0.4"
   },
   "devDependencies": {
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "serverless-offline": "^4.10.5",
     "should": "^13.2.3",
     "supertest": "^4.0.2"
